@@ -2,6 +2,17 @@
 
 > A flexible Vue table component.
 
+This motivation to create this table component was to have a table that
+- takes up all space that it has available,
+- scrolls when available space is not enough,
+- resizes it's columns dynamically,
+- has a fixed head when the body is overflowing vertically,
+- synchronizes body and head when scrolling horizontally,
+- has custom sorting,
+- is used somewhat compatible with [bootstrap-vue's table](https://bootstrap-vue.js.org/docs/components/table).
+
+An example of vue-flexible-table in use can be found [here](https://gbv.github.io/cocoda/dev/?schemeLeft=http%3A%2F%2Fdewey.info%2Fscheme%2Fedition%2Fe23%2F&schemeRight=http%3A%2F%2Furi.gbv.de%2Fterminology%2Frvk%2F&conceptLeft=http%3A%2F%2Fdewey.info%2Fclass%2F612.112%2Fe23%2F&conceptRight=http%3A%2F%2Frvk.uni-regensburg.de%2Fnt%2FWW_8840). For the source of that example, see [here](https://github.com/gbv/cocoda/blob/dev/src/components/MappingBrowser.vue) and [here](https://github.com/gbv/cocoda/blob/dev/src/components/OccurrencesBrowser.vue).
+
 ## Table of Contents
 
 - [Install](#install)
