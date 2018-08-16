@@ -10,8 +10,11 @@
           v-for="field in fields"
           :key="'HEAD_' + field.key"
           :style="cellStyle(field)"
-          :class="field.class"
-          class="flexibleTable-cell"
+          :class="{
+            [field.class]: true,
+            'flexibleTable-cell': true,
+            'flexibleTable-sortable': field.sortable
+          }"
           @click="field.sortable && sort(field)" >
           <!-- Slot for head cell content. Override with <template slot="HEAD_key" slot-scope="{ field }"> -->
           <slot
@@ -307,10 +310,12 @@ export default {
 }
 .flexibleTable-head .flexibleTable-cell {
   user-select: none;
-  cursor: pointer;
   border-bottom: 1px solid rgba(0,0,0,0.2);
 }
-.flexibleTable-head .flexibleTable-cell:hover {
+.flexibleTable-head .flexibleTable-cell.flexibleTable-sortable {
+  cursor: pointer;
+}
+.flexibleTable-head .flexibleTable-cell.flexibleTable-sortable:hover {
   color: rgba(0,0,0,0.5);
 }
 .flexibleTable-body .flexibleTable-cell {
