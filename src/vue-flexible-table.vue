@@ -324,17 +324,8 @@ export default {
   border-bottom: 1px solid rgba(0,0,0,0.1);
   position: relative;
 }
-/*
-Use pseudo element to apply background color on hover.
-See: https://www.designcise.com/web/tutorial/how-to-apply-css-opacity-to-background-color-only
-*/
-.flexibleTable-body .flexibleTable-row:hover .flexibleTable-cell::after {
-  content: '';
-  width: 100%;
-	height: 100%;
-  position: absolute;
-	top: 0;
-	left: 0;
+.flexibleTable-body .flexibleTable-row:hover .flexibleTable-cell {
+  /* FIXME: This overrides custom background colors. */
   background-color: rgba(0,0,0,0.1);
 }
 .flexibleTable-cell-sort {
