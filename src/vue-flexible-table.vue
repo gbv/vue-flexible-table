@@ -79,7 +79,6 @@
       <div
         v-for="(item, item_index) in sortedItems"
         :key="'ITEM' + item_index"
-        :class="item._rowClass"
         class="flexibleTable-row"
         @mouseover="$emit('hover', item)"
         @mouseout="$emit('hover', null)" >
@@ -87,8 +86,11 @@
           v-for="field in fields"
           :key="'ITEM_' + item_index + '_' + field.key"
           :style="cellStyle(field)"
-          :class="field.class"
-          class="flexibleTable-cell">
+          :class="{
+            [field.class]: field.class != null,
+            'flexibleTable-cell': true,
+            [item._rowClass]: item._rowClass != null
+          }">
           <!-- Slot for cell content. Override with <template slot="HEAD_key" slot-scope="{ field, item, value }"> -->
           <slot
             :name="field.key"
@@ -320,8 +322,19 @@ export default {
 }
 .flexibleTable-body .flexibleTable-cell {
   border-bottom: 1px solid rgba(0,0,0,0.1);
+  position: relative;
 }
-.flexibleTable-body .flexibleTable-row:hover .flexibleTable-cell {
+/*
+Use pseudo element to apply background color on hover.
+See: https://www.designcise.com/web/tutorial/how-to-apply-css-opacity-to-background-color-only
+*/
+.flexibleTable-body .flexibleTable-row:hover .flexibleTable-cell::after {
+  content: '';
+  width: 100%;
+	height: 100%;
+  position: absolute;
+	top: 0;
+	left: 0;
   background-color: rgba(0,0,0,0.1);
 }
 .flexibleTable-cell-sort {
