@@ -187,12 +187,21 @@ export default {
      * Returns a sorted list of items according to the current sorting preferences.
      */
     sortedItems() {
-      if (this.sorting.sortDirection == 0 || !this.sorting.sortBy) {
+      let sortBy = this.sorting.sortBy
+      if (this.sorting.sortDirection == 0 || !sortBy) {
         return this.items
       }
       let items = this.items.slice()
-      let sortField = this.fields.find(f => f.key == this.sorting.sortBy)
-      let compare = sortField && sortField.compare || ((a, b) => a[this.sorting.sortBy] > b[this.sorting.sortBy])
+      let sortField = this.fields.find(f => f.key == sortBy)
+      let compare = sortField && sortField.compare || ((a, b) => {
+        if (a[sortBy] < b[sortBy]) {
+          return -1
+        }
+        if (a[sortBy] > b[sortBy]) {
+          return 1
+        }
+        return 0
+      })
       items.sort(compare)
       if (this.sorting.sortDirection == -1) {
         items = items.reverse()
