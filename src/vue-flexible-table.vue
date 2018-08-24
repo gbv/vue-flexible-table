@@ -192,7 +192,7 @@ export default {
       }
       let items = this.items.slice()
       let sortField = this.fields.find(f => f.key == this.sorting.sortBy)
-      let compare = sortField && sortField.compare || ((a, b) => a[this.sorting.sortBy] < b[this.sorting.sortBy])
+      let compare = sortField && sortField.compare || ((a, b) => a[this.sorting.sortBy] > b[this.sorting.sortBy])
       items.sort(compare)
       if (this.sorting.sortDirection == -1) {
         items = items.reverse()
