@@ -194,10 +194,11 @@ export default {
       let items = this.items.slice()
       let sortField = this.fields.find(f => f.key == sortBy)
       let compare = sortField && sortField.compare || ((a, b) => {
-        if (a[sortBy] < b[sortBy]) {
+        let valueA = a[sortBy], valueB = b[sortBy]
+        if (valueA == null || valueA < valueB) {
           return -1
         }
-        if (a[sortBy] > b[sortBy]) {
+        if (valueB == null || valueA > valueB) {
           return 1
         }
         return 0
