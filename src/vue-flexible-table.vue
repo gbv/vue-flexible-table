@@ -20,7 +20,7 @@
           <slot
             :name="'HEAD_' + field.key"
             :field="field">
-            {{ field.label || capitalizeFirst(field.key) }}
+            {{ fieldLabel(field) }}
             <span
               class="flexibleTable-cell-sort" >
               <!--
@@ -256,13 +256,16 @@ export default {
       return style
     },
     /**
-     * Capitalizes the first letter of a string.
+     * Get label of a field, optionally derived from field key.
      */
-    capitalizeFirst(string) {
-      if (string.length == 0) {
-        return string
+    fieldLabel(field) {
+      if (field.label || field.label === "") {
+        return field.label
+      } else {
+        // convert multipleWordKEYS into "Multiple Word KEYS"
+        let label = field.key.replace(/([A-Z]+)/g, " $1").replace(/([A-Z][a-z])/g, " $1")
+        return label[0].toUpperCase() + label.substring(1)
       }
-      return string[0].toUpperCase() + string.substring(1)
     },
     /**
      * Determines default table cell content.
