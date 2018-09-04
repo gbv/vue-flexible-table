@@ -13,6 +13,7 @@
           :class="{
             [field.class]: true,
             'flexibleTable-cell': true,
+            ['flexibleTable-cell-' + (field.align || defaultAlign)]: true,
             'flexibleTable-sortable': field.sortable
           }"
           @click="field.sortable && sort(field)" >
@@ -89,6 +90,7 @@
           :class="{
             [field.class]: field.class != null,
             'flexibleTable-cell': true,
+            ['flexibleTable-cell-' + (field.align || defaultAlign)]: true,
             [item._rowClass]: item._rowClass != null
           }">
           <!-- Slot for cell content. Override with <template slot="HEAD_key" slot-scope="{ field, item, value }"> -->
@@ -118,6 +120,7 @@ export default {
      * - `key`: key for the field/column (required)
      * - `label`: label for the column (optional, defaults to key with capitalized first letter)
      * - `class`: class name for the cell (optional)
+     * - `align`: alignment of the cell (optional, default center)
      * - `width`: CSS width of the column (optional)
      * - `minWidth`: CSS minWidth of the column (optional)
      * - `sortable`: true if this field should be sortable (optional, default false)
@@ -180,6 +183,8 @@ export default {
         sortBy: null,
         sortDirection: 0,
       },
+      // Contains the default alignment
+      defaultAlign: "center",
     }
   },
   computed: {
@@ -303,7 +308,6 @@ export default {
 .flexibleTable {
   display: flex;
   flex-direction: column;
-  text-align: center;
 }
 .flexibleTable-head {
   flex: none;
@@ -319,9 +323,20 @@ export default {
 }
 /* Cell styles */
 .flexibleTable-cell {
-  padding: 4px 2px;
   overflow: hidden;
   flex: 1;
+}
+.flexibleTable-cell-center {
+  padding: 4px 2px;
+  text-align: center;
+}
+.flexibleTable-cell-left {
+  padding: 4px 6px;
+  text-align: left;
+}
+.flexibleTable-cell-right {
+  padding: 4px 6px;
+  text-align: right;
 }
 .flexibleTable-head .flexibleTable-cell {
   user-select: none;
