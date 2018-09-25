@@ -21,7 +21,9 @@
           <slot
             :name="'HEAD_' + field.key"
             :field="field">
-            {{ fieldLabel(field) }}
+            <span :class="field.titleClass">
+              {{ fieldLabel(field) }}
+            </span>
             <span
               class="flexibleTable-cell-sort" >
               <!--
@@ -120,6 +122,7 @@ export default {
      * - `key`: key for the field/column (required)
      * - `label`: label for the column (optional, defaults to key with capitalized first letter)
      * - `class`: class name for the cell (optional)
+     * - `titleClass`: class name for the title of the cell (optional)
      * - `align`: alignment of the cell (optional, default center)
      * - `width`: CSS width of the column (optional)
      * - `minWidth`: CSS minWidth of the column (optional)
