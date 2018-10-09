@@ -95,7 +95,7 @@
             ['flexibleTable-cell-' + (field.align || defaultAlign)]: true,
             [item._rowClass]: item._rowClass != null
           }">
-          <!-- Slot for cell content. Override with <template slot="HEAD_key" slot-scope="{ field, item, value }"> -->
+          <!-- Slot for cell content. Override with <template slot="key" slot-scope="{ field, item, value }"> -->
           <slot
             :name="field.key"
             :field="field"
