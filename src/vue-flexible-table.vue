@@ -82,27 +82,51 @@
       <div
         v-for="(item, item_index) in sortedItems"
         :key="'ITEM' + item_index"
-        class="flexibleTable-row"
         @mouseover="$emit('hover', item)"
         @mouseout="$emit('hover', null)" >
+        <!-- Special case to use a whole row for an item -->
         <div
-          v-for="field in fields"
-          :key="'ITEM_' + item_index + '_' + field.key"
-          :style="cellStyle(field)"
-          :class="{
-            [field.class]: field.class != null,
-            'flexibleTable-cell': true,
-            ['flexibleTable-cell-' + (field.align || defaultAlign)]: true,
-            [item._rowClass]: item._rowClass != null
-          }">
-          <!-- Slot for cell content. Override with <template slot="key" slot-scope="{ field, item, value }"> -->
-          <slot
-            :name="field.key"
-            :field="field"
-            :item="item"
-            :value="item[field.key]" >
-            {{ defaultCellContent(item[field.key]) }}
-          </slot>
+          v-if="item._wholeRow"
+          class="flexibleTable-row" >
+          <div
+            style="flex: 0 0 100%;"
+            :class="{
+              'flexibleTable-cell': true,
+              ['flexibleTable-cell-' + (item.align || defaultAlign)]: true,
+              [item._rowClass]: item._rowClass != null
+            }" >
+            <!-- Slot for whole row. Override with <template slot="ITEM_ROW" slot-scope="{ item, value }"> -->
+            <slot
+              :name="'ITEM_ROW'"
+              :item="item"
+              :value="item.value" >
+              {{ item.value }}
+            </slot>
+          </div>
+        </div>
+        <!-- Normal case to display cells according to "fields" -->
+        <div
+          v-else
+          class="flexibleTable-row" >
+          <div
+            v-for="field in fields"
+            :key="'ITEM_' + item_index + '_' + field.key"
+            :style="cellStyle(field)"
+            :class="{
+              [field.class]: field.class != null,
+              'flexibleTable-cell': true,
+              ['flexibleTable-cell-' + (field.align || defaultAlign)]: true,
+              [item._rowClass]: item._rowClass != null
+            }">
+            <!-- Slot for cell content. Override with <template slot="key" slot-scope="{ field, item, value }"> -->
+            <slot
+              :name="field.key"
+              :field="field"
+              :item="item"
+              :value="item[field.key]" >
+              {{ defaultCellContent(item[field.key]) }}
+            </slot>
+          </div>
         </div>
       </div>
     </div>
@@ -141,6 +165,7 @@ export default {
      * Additional keys (optional):
      *
      * - `_rowClass`: class for the row
+     * - `_wholeRow`: boolean whether the item will be displayed as a whole row (uses key `value`, but better used with slots)
      */
     items: {
       type: Array,
