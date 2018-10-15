@@ -5,7 +5,9 @@
     <!-- Head -->
     <div class="flexibleTable-head">
       <!-- Just one row in head -->
-      <div class="flexibleTable-row">
+      <div
+        v-if="!hideHeader"
+        class="flexibleTable-row">
         <div
           v-for="field in fields"
           :key="'HEAD_' + field.key"
@@ -202,6 +204,13 @@ export default {
     sortDirection: {
       type: Number,
       default: 1
+    },
+    /**
+     * Option to hide the table header.
+     */
+    hideHeader: {
+      type: Boolean,
+      default: false
     },
   },
   data() {
