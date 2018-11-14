@@ -290,7 +290,7 @@ export default {
     cellStyle(field) {
       let style = {}
       if (field.width != null) {
-        style.flex = `0 0 ${field.width}`
+        style.flex = `1 0 ${field.width}`
       }
       if (field.minWidth != null) {
         style.minWidth = `${field.minWidth}`
