@@ -314,7 +314,7 @@ export default {
      * Objects and arrays won't be displayed.
      */
     defaultCellContent(value) {
-      if (typeof value === "object") {
+      if (typeof value === "object" && value != null) {
         return value.id || value._id || value.uri || "Object"
       } else {
         return value
