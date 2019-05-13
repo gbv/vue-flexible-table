@@ -1,5 +1,6 @@
 # vue-flexible-table
 
+[![Build Status](https://travis-ci.com/stefandesu/vue-flexible-table.svg?branch=master)](https://travis-ci.com/stefandesu/vue-flexible-table)
 [![GitHub package version](https://img.shields.io/github/package-json/v/stefandesu/vue-flexible-table.svg?label=version)](https://github.com/stefandesu/vue-flexible-table)
 [![NPM package name](https://img.shields.io/badge/npm-vue--flexible--table-blue.svg)](https://www.npmjs.com/package/vue-flexible-table)
 
