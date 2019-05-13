@@ -1,7 +1,7 @@
 <template>
   <div
     :style="tableStyle()"
-    class="flexibleTable" >
+    class="flexibleTable">
     <!-- Head -->
     <div class="flexibleTable-head">
       <!-- Just one row in head -->
@@ -18,7 +18,7 @@
             ['flexibleTable-cell-' + (field.align || defaultAlign)]: true,
             'flexibleTable-sortable': field.sortable
           }"
-          @click="field.sortable && sort(field)" >
+          @click="field.sortable && sort(field)">
           <!-- Slot for head cell content. Override with <template slot="HEAD_key" slot-scope="{ field }"> -->
           <slot
             :name="'HEAD_' + field.key"
@@ -27,7 +27,7 @@
               {{ fieldLabel(field) }}
             </span>
             <span
-              class="flexibleTable-cell-sort" >
+              class="flexibleTable-cell-sort">
               <!--
                 SVG icon by FontAwesome
                 URL: https://fontawesome.com/icons/sort-up?style=solid
@@ -41,7 +41,7 @@
                 viewBox="0 -60 320 512">
                 <path
                   fill="currentColor"
-                  d="M279 224H41c-21.4 0-32.1-25.9-17-41L143 64c9.4-9.4 24.6-9.4 33.9 0l119 119c15.2 15.1 4.5 41-16.9 41z"/>
+                  d="M279 224H41c-21.4 0-32.1-25.9-17-41L143 64c9.4-9.4 24.6-9.4 33.9 0l119 119c15.2 15.1 4.5 41-16.9 41z" />
               </svg>
               <!--
                 SVG icon by FontAwesome
@@ -56,7 +56,7 @@
                 viewBox="0 -60 320 512">
                 <path
                   fill="currentColor"
-                  d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41z"/>
+                  d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41z" />
               </svg>
               <!--
                 SVG icon by FontAwesome
@@ -71,7 +71,7 @@
                 viewBox="0 -60 320 512">
                 <path
                   fill="currentColor"
-                  d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z"/>
+                  d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z" />
               </svg>
             </span>
           </slot>
@@ -85,23 +85,23 @@
         v-for="(item, item_index) in sortedItems"
         :key="'ITEM' + item_index"
         @mouseover="$emit('hover', item)"
-        @mouseout="$emit('hover', null)" >
+        @mouseout="$emit('hover', null)">
         <!-- Special case to use a whole row for an item -->
         <div
           v-if="item._wholeRow"
-          class="flexibleTable-row" >
+          class="flexibleTable-row">
           <div
             style="flex: 0 0 100%;"
             :class="{
               'flexibleTable-cell': true,
               ['flexibleTable-cell-' + (item.align || defaultAlign)]: true,
               [item._rowClass]: item._rowClass != null
-            }" >
+            }">
             <!-- Slot for whole row. Override with <template slot="ITEM_ROW" slot-scope="{ item, value }"> -->
             <slot
               :name="'ITEM_ROW'"
               :item="item"
-              :value="item.value" >
+              :value="item.value">
               {{ item.value }}
             </slot>
           </div>
@@ -109,7 +109,7 @@
         <!-- Normal case to display cells according to "fields" -->
         <div
           v-else
-          class="flexibleTable-row" >
+          class="flexibleTable-row">
           <div
             v-for="field in fields"
             :key="'ITEM_' + item_index + '_' + field.key"
@@ -125,7 +125,7 @@
               :name="field.key"
               :field="field"
               :item="item"
-              :value="item[field.key]" >
+              :value="item[field.key]">
               {{ defaultCellContent(item[field.key]) }}
             </slot>
           </div>
@@ -211,32 +211,32 @@ export default {
     hideHeader: {
       type: Boolean,
       default: false
-    },
+    }
   },
-  data() {
+  data () {
     return {
       // Contains the current sorting preferences.
       sorting: {
         sortBy: null,
-        sortDirection: 0,
+        sortDirection: 0
       },
       // Contains the default alignment
-      defaultAlign: "center",
+      defaultAlign: "center"
     }
   },
   computed: {
     /**
      * Returns a sorted list of items according to the current sorting preferences.
      */
-    sortedItems() {
+    sortedItems () {
       let sortBy = this.sorting.sortBy
-      if (this.sorting.sortDirection == 0 || !sortBy) {
+      if (this.sorting.sortDirection === 0 || !sortBy) {
         return this.items
       }
       let items = this.items.slice()
-      let sortField = this.fields.find(f => f.key == sortBy)
-      let compare = sortField && sortField.compare || ((a, b) => {
-        let valueA = a[sortBy], valueB = b[sortBy]
+      let sortField = this.fields.find(f => f.key === sortBy)
+      let compare = (sortField && sortField.compare) || ((a, b) => {
+        let valueA = a[sortBy]; let valueB = b[sortBy]
         if (valueA == null || valueA < valueB) {
           return -1
         }
@@ -246,13 +246,13 @@ export default {
         return 0
       })
       items.sort(compare)
-      if (this.sorting.sortDirection == -1) {
+      if (this.sorting.sortDirection === -1) {
         items = items.reverse()
       }
       return items
     }
   },
-  mounted() {
+  mounted () {
     // Set initial sorting preferences
     this.sorting.sortBy = this.sortBy
     this.sorting.sortDirection = this.sortDirection
@@ -278,7 +278,7 @@ export default {
     /**
      * Style object for the whole table.
      */
-    tableStyle() {
+    tableStyle () {
       return {
         maxWidth: this.maxWidth,
         maxHeight: this.maxHeight
@@ -287,7 +287,7 @@ export default {
     /**
      * Style object for each cell.
      */
-    cellStyle(field) {
+    cellStyle (field) {
       let style = {}
       if (field.width != null) {
         style.flex = `1 0 ${field.width}`
@@ -300,7 +300,7 @@ export default {
     /**
      * Get label of a field, optionally derived from field key.
      */
-    fieldLabel(field) {
+    fieldLabel (field) {
       if (field.label || field.label === "") {
         return field.label
       } else {
@@ -313,7 +313,7 @@ export default {
      * Determines default table cell content.
      * Objects and arrays won't be displayed.
      */
-    defaultCellContent(value) {
+    defaultCellContent (value) {
       if (typeof value === "object" && value != null) {
         return value.id || value._id || value.uri || "Object"
       } else {
@@ -323,11 +323,11 @@ export default {
     /**
      * Sets the sorting preferences.
      */
-    sort(field) {
-      if (this.sorting.sortBy == field.key) {
-        if (this.sorting.sortDirection == 0) {
+    sort (field) {
+      if (this.sorting.sortBy === field.key) {
+        if (this.sorting.sortDirection === 0) {
           this.sorting.sortDirection = 1
-        } else if (this.sorting.sortDirection == 1) {
+        } else if (this.sorting.sortDirection === 1) {
           this.sorting.sortDirection = -1
         } else {
           this.sorting.sortDirection = 0
@@ -336,8 +336,8 @@ export default {
         this.sorting.sortBy = field.key
         this.sorting.sortDirection = 1
       }
-    },
-  },
+    }
+  }
 }
 </script>
 
