@@ -80,55 +80,79 @@
     </div>
     <!-- Body -->
     <div class="flexibleTable-body">
-      <!-- One row for each item -->
+      <!-- Sections -->
       <div
-        v-for="(item, item_index) in sortedItems"
-        :key="'ITEM' + item_index"
-        @mouseover="$emit('hover', item)"
-        @mouseout="$emit('hover', null)">
-        <!-- Special case to use a whole row for an item -->
+        v-for="(section, section_index) in _sections"
+        :key="`SECTION_${section_index}`"
+        class="flexibleTable-section">
+        <!-- BEFORE_SECTION slot -->
         <div
-          v-if="item._wholeRow"
-          class="flexibleTable-row">
+          v-if="hasSlot('BEFORE_SECTION')"
+          class="flexibleTable-section-before">
+          <slot
+            name="BEFORE_SECTION"
+            :section="section" />
+        </div>
+        <div class="flexibleTable-rows">
+          <!-- One row for each item -->
           <div
-            style="flex: 0 0 100%;"
-            :class="{
-              'flexibleTable-cell': true,
-              ['flexibleTable-cell-' + (item.align || defaultAlign)]: true,
-              [item._rowClass]: item._rowClass != null
-            }">
-            <!-- Slot for whole row. Override with <template slot="ITEM_ROW" slot-scope="{ item, value }"> -->
-            <slot
-              :name="'ITEM_ROW'"
-              :item="item"
-              :value="item.value">
-              {{ item.value }}
-            </slot>
+            v-for="(item, item_index) in sorted(section.items)"
+            :key="`SECTION_${section_index}_ITEM_${item_index}`"
+            @mouseover="$emit('hover', item)"
+            @mouseout="$emit('hover', null)">
+            <!-- Special case to use a whole row for an item -->
+            <div
+              v-if="item._wholeRow"
+              class="flexibleTable-row">
+              <div
+                style="flex: 0 0 100%;"
+                :class="{
+                  'flexibleTable-cell': true,
+                  ['flexibleTable-cell-' + (item.align || defaultAlign)]: true,
+                  [item._rowClass]: item._rowClass != null
+                }">
+                <!-- Slot for whole row. Override with <template slot="ITEM_ROW" slot-scope="{ item, value }"> -->
+                <slot
+                  :name="'ITEM_ROW'"
+                  :item="item"
+                  :value="item.value">
+                  {{ item.value }}
+                </slot>
+              </div>
+            </div>
+            <!-- Normal case to display cells according to "section.fields" -->
+            <div
+              v-else
+              class="flexibleTable-row">
+              <div
+                v-for="field in section.fields"
+                :key="`SECTION_${section_index}_ITEM_${item_index}_FIELD_${field.key}`"
+                :style="cellStyle(field)"
+                :class="{
+                  [field.class]: field.class != null,
+                  'flexibleTable-cell': true,
+                  ['flexibleTable-cell-' + (field.align || defaultAlign)]: true,
+                  [item._rowClass]: item._rowClass != null
+                }">
+                <!-- Slot for cell content. Override with <template slot="key" slot-scope="{ field, item, value }"> -->
+                <slot
+                  :name="field.key"
+                  :field="field"
+                  :item="item"
+                  :value="item[field.key]">
+                  {{ defaultCellContent(item[field.key]) }}
+                </slot>
+              </div>
+            </div>
           </div>
         </div>
-        <!-- Normal case to display cells according to "fields" -->
+        <!-- AFTER_SECTION slot -->
         <div
-          v-else
-          class="flexibleTable-row">
-          <div
-            v-for="field in fields"
-            :key="'ITEM_' + item_index + '_' + field.key"
-            :style="cellStyle(field)"
-            :class="{
-              [field.class]: field.class != null,
-              'flexibleTable-cell': true,
-              ['flexibleTable-cell-' + (field.align || defaultAlign)]: true,
-              [item._rowClass]: item._rowClass != null
-            }">
-            <!-- Slot for cell content. Override with <template slot="key" slot-scope="{ field, item, value }"> -->
-            <slot
-              :name="field.key"
-              :field="field"
-              :item="item"
-              :value="item[field.key]">
-              {{ defaultCellContent(item[field.key]) }}
-            </slot>
-          </div>
+          v-if="hasSlot('AFTER_SECTION')"
+          class="flexibleTable-section-after">
+          <slot
+            name="AFTER_SECTION"
+            :section="section" />
         </div>
       </div>
     </div>
@@ -172,6 +196,18 @@ export default {
     items: {
       type: Array,
       default: () => [],
+    },
+    /**
+     * An optional array of section objects with the following properties:
+     *
+     * - `items`: items for section (required, see global `items` prop)
+     * - `fields`: fields for section (optional, fallback to global `fields` prop)
+     *
+     * If `sections` is given, `items` will be ignored.
+     */
+    sections: {
+      type: Array,
+      default: null,
     },
     /**
      * Maximum width of the whole table.
@@ -226,30 +262,19 @@ export default {
   },
   computed: {
     /**
-     * Returns a sorted list of items according to the current sorting preferences.
+     * Computes a sections array where each object has a `items` and `fields` property.
      */
-    sortedItems () {
-      let sortBy = this.sorting.sortBy
-      if (this.sorting.sortDirection === 0 || !sortBy) {
-        return this.items
+    _sections () {
+      if (!this.sections) {
+        return [
+          {
+            items: this.items,
+            fields: this.fields,
+          },
+        ]
       }
-      let items = this.items.slice()
-      let sortField = this.fields.find(f => f.key === sortBy)
-      let compare = (sortField && sortField.compare) || ((a, b) => {
-        let valueA = a[sortBy]; let valueB = b[sortBy]
-        if (valueA == null || valueA < valueB) {
-          return -1
-        }
-        if (valueB == null || valueA > valueB) {
-          return 1
-        }
-        return 0
-      })
-      items.sort(compare)
-      if (this.sorting.sortDirection === -1) {
-        items = items.reverse()
-      }
-      return items
+      let sections = this.sections.map(section => Object.assign({ fields: this.fields, items: [] }, section))
+      return sections
     },
   },
   mounted () {
@@ -337,6 +362,36 @@ export default {
         this.sorting.sortDirection = 1
       }
     },
+    /**
+     * Returns a sorted list of items according to the current sorting preferences.
+     */
+    sorted (items) {
+      let sortBy = this.sorting.sortBy
+      if (this.sorting.sortDirection === 0 || !sortBy) {
+        return items
+      }
+      items = items.slice()
+      let sortField = this.fields.find(f => f.key === sortBy)
+      let compare = (sortField && sortField.compare) || ((a, b) => {
+        let valueA = a[sortBy]; let valueB = b[sortBy]
+        if (valueA == null || valueA < valueB) {
+          return -1
+        }
+        if (valueB == null || valueA > valueB) {
+          return 1
+        }
+        return 0
+      })
+      items.sort(compare)
+      if (this.sorting.sortDirection === -1) {
+        items = items.reverse()
+      }
+      return items
+    },
+    // from: https://forum.vuejs.org/t/check-if-components-slot-is-empty/6015/6
+    hasSlot (name = "default") {
+      return !!this.$slots[name] || !!this.$scopedSlots[name];
+    },
   },
 }
 </script>
@@ -388,6 +443,20 @@ export default {
 .flexibleTable-body .flexibleTable-cell {
   border-bottom: 1px solid rgba(0,0,0,0.1);
   position: relative;
+}
+.flexibleTable-body .flexibleTable-rows > div:last-child .flexibleTable-cell {
+  border-bottom: none;
+}
+.flexibleTable-section {
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+.flexibleTable-section-before {
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  padding: 3px 0;
+}
+.flexibleTable-section-after {
+  border-top: 1px solid rgba(0,0,0,0.1);
+  padding: 3px 0;
 }
 .flexibleTable-body .flexibleTable-row:hover .flexibleTable-cell {
   /* FIXME: This overrides custom background colors. */
