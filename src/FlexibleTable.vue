@@ -157,7 +157,7 @@ export default {
      */
     fields: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     /**
      * An array if items to be shown in the table.
@@ -171,28 +171,28 @@ export default {
      */
     items: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     /**
      * Maximum width of the whole table.
      */
     maxWidth: {
       type: String,
-      default: "100%"
+      default: "100%",
     },
     /**
      * Maximum height of the whole table.
      */
     maxHeight: {
       type: String,
-      default: "100%"
+      default: "100%",
     },
     /**
      * Key to sort table by (overridden by user choice).
      */
     sortBy: {
       type: String,
-      default: null
+      default: null,
     },
     /**
      * Direction to sort table by (overridden by user choice).
@@ -203,25 +203,25 @@ export default {
      */
     sortDirection: {
       type: Number,
-      default: 1
+      default: 1,
     },
     /**
      * Option to hide the table header.
      */
     hideHeader: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   data () {
     return {
       // Contains the current sorting preferences.
       sorting: {
         sortBy: null,
-        sortDirection: 0
+        sortDirection: 0,
       },
       // Contains the default alignment
-      defaultAlign: "center"
+      defaultAlign: "center",
     }
   },
   computed: {
@@ -250,7 +250,7 @@ export default {
         items = items.reverse()
       }
       return items
-    }
+    },
   },
   mounted () {
     // Set initial sorting preferences
@@ -281,7 +281,7 @@ export default {
     tableStyle () {
       return {
         maxWidth: this.maxWidth,
-        maxHeight: this.maxHeight
+        maxHeight: this.maxHeight,
       }
     },
     /**
@@ -336,8 +336,8 @@ export default {
         this.sorting.sortBy = field.key
         this.sorting.sortDirection = 1
       }
-    }
-  }
+    },
+  },
 }
 </script>
 

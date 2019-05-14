@@ -15,7 +15,7 @@ import Example01 from "./Example01"
 import Example02 from "./Example02"
 
 export default {
-  name: "app",
+  name: "App",
   components: {
     Example01,
     Example02,

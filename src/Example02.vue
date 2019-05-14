@@ -8,7 +8,7 @@
 import FlexibleTable from "./FlexibleTable"
 
 export default {
-  name: "app",
+  name: "Example02",
   components: { FlexibleTable },
   data () {
     return {

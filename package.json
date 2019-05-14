@@ -50,57 +50,6 @@
     "lint-staged": "^8.1.6",
     "vue-template-compiler": "^2.5.21"
   },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "@vue/standard"
-    ],
-    "rules": {
-      "no-console": "off",
-      "no-debugger": "off",
-      "no-undef": "off",
-      "indent": [
-        "error",
-        2,
-        {
-          "SwitchCase": 1
-        }
-      ],
-      "linebreak-style": [
-        "error",
-        "unix"
-      ],
-      "quotes": [
-        "error",
-        "double"
-      ],
-      "vue/no-v-html": "off",
-      "vue/html-closing-bracket-newline": [
-        "error",
-        {
-          "singleline": "never",
-          "multiline": "never"
-        }
-      ],
-      "vue/html-closing-bracket-spacing": [
-        "error",
-        {
-          "startTag": "never",
-          "endTag": "never",
-          "selfClosingTag": "always"
-        }
-      ],
-      "comma-dangle": ["error", "only-multiline"]
-    },
-    "parserOptions": {
-      "sourceType": "module",
-      "parser": "babel-eslint"
-    }
-  },
   "postcss": {
     "plugins": {
       "autoprefixer": {}

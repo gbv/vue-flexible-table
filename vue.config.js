@@ -2,7 +2,7 @@ module.exports = {
   devServer: {
     host: "localhost",
     port: 8088,
-    useLocalIp: false
+    useLocalIp: false,
   },
   runtimeCompiler: true,
   productionSourceMap: false,
@@ -17,5 +17,5 @@ module.exports = {
         options.compilerOptions.preserveWhitespace = true
         return options
       })
-  }
+  },
 }
