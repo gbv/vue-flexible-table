@@ -1,62 +1,25 @@
 <template>
   <div id="app">
-    <flexible-table
-      class="table1"
-      :fields="fields"
-      :items="items" />
-     <flexible-table
-      :fields="fields"
-      :items="items" />
+    <h1>vue-flexible-table</h1>
+    <a href="https://github.com/stefandesu/vue-flexible-table">https://github.com/stefandesu/vue-flexible-table</a>
+    <h2>Examples:</h2>
+    <h3>Simple table with fixed with</h3>
+    <example-01 />
+    <h3>Simple table with 100% width (default) and a rowClass</h3>
+    <example-02 />
   </div>
 </template>
 
 <script>
-import FlexibleTable from "./FlexibleTable"
+import Example01 from "./Example01"
+import Example02 from "./Example02"
 
 export default {
   name: "app",
-  components: { FlexibleTable },
-  data () {
-    return {
-      fields: [
-        {
-          key: "c1",
-          label: "Column 1",
-          sortable: true,
-          minWidth: "200px",
-          align: "center"
-        },
-        {
-          key: "c2",
-          label: "Column 2",
-          minWidth: "200px"
-        }
-      ],
-      items: [
-        {
-          c1: "Hello",
-          c2: "World",
-          _rowClass: "red"
-        },
-        {
-          c1: "What's",
-          c2: "up?"
-        },
-        {
-          c1: "What's",
-          c2: "up?"
-        },
-        {
-          c1: "What's",
-          c2: "up?"
-        },
-        {
-          c1: "What's",
-          c2: "up?"
-        }
-      ]
-    }
-  }
+  components: {
+    Example01,
+    Example02,
+  },
 }
 </script>
 
@@ -68,13 +31,5 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
-}
-.table1 {
-  width: 300px;
-  margin: 0 auto;
-  overflow: scroll;
-}
-.red {
-  background-color: red;
 }
 </style>
