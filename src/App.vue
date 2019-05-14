@@ -7,18 +7,22 @@
     <example-01 />
     <h3>Simple table with 100% width (default) and a rowClass</h3>
     <example-02 />
+    <h3>Table with sections</h3>
+    <example-03 />
   </div>
 </template>
 
 <script>
 import Example01 from "./Example01"
 import Example02 from "./Example02"
+import Example03 from "./Example03"
 
 export default {
   name: "App",
   components: {
     Example01,
     Example02,
+    Example03,
   },
 }
 </script>
