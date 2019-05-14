@@ -1,17 +1,24 @@
 language: node_js
 node_js:
-  - "11"
+- '11'
 install:
-  - travis_retry npm ci
+- travis_retry npm ci
 script:
-  - npm run lint
-  - npm run build
-  - npm run build-app
+- npm run lint
+- npm run build
+- npm run build-app
 deploy:
-  provider: pages
-  local_dir: dist/
-  skip_cleanup: true
-  github_token: $GITHUB_TOKEN
-  keep_history: true
-  on:
-    branch: master
+  - provider: npm
+    email: stefandesu@exo.pm
+    api_key:
+      secure: KnHB5zXCy0fefqaCAViPM96nqlktoKrjJi4/WTpdTjVQAWVbc3jx/Kow84WD3Kf1X1qxqs1FCuAVtEwuIm4sUeAlNo++OkYAHrlP7G/HeYud/cdB5VxF9hMN+tf3qyG+Xt3McWPMU5ydbpYdkA3K+f6xp4z5PJ3tOdesFPRVqAnq5iwmzLZgVb4UdHaWyEoSOm5nX9z5WG+9a7VC0rshZsE9FaySvstSf8sSoGzqT3goydSGZ4YKdv03xFdqc34u+k2ZknAq9ZkdCMkBCLpKPxuMZmkeJXdoLet0jBynimSaSPMZGyqXjPAjtdgMJRjoRybXHYHeiXz2nD6ePbw0mz1TrzC9Ly5Un7B/LXfWAyJQTGC8Wi/WzRnS0G0mooOB30fdbVgcReCsRssHT4cgl0bo9CoIjg8IwaXq8t6Iz4WUUO8+TVtCRylBy52bJGBc1u8QWE94Reav+kFCndmgbzfvcpOAgaqt0L6DwQcMEXQfMJBA63zxSVRFCGZqpLJiNtO/XBoeRNkMrmZOxSqciPNM2wFkXGC5/K9xMHBBAD1f1GpZYU5tsaIoX316fnOMHmj6QFmS10qzjzs7O6Q+J3ld39T5R9wSgIwzp6XObrq1uL+X/PEJ49raPTAp7oqCcHuUc06rjkOBg4afuKf5kDlYPreBEcD4Vx7Oh1iC6sw=
+    on:
+      tags: true
+      repo: stefandesu/vue-flexible-table
+  - provider: pages
+    local_dir: dist/
+    skip_cleanup: true
+    github_token: "$GITHUB_TOKEN"
+    keep_history: true
+    on:
+      branch: master
