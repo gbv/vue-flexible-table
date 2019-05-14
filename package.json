@@ -93,7 +93,8 @@
           "endTag": "never",
           "selfClosingTag": "always"
         }
-      ]
+      ],
+      "comma-dangle": ["error", "only-multiline"]
     },
     "parserOptions": {
       "sourceType": "module",
