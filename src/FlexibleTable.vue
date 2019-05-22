@@ -432,7 +432,7 @@ export default {
 }
 .flexibleTable-head .flexibleTable-cell {
   user-select: none;
-  border-bottom: 1px solid rgba(0,0,0,0.2);
+  border-bottom: 1px solid rgba(0,0,0,0.4);
 }
 .flexibleTable-head .flexibleTable-cell.flexibleTable-sortable {
   cursor: pointer;
@@ -448,7 +448,7 @@ export default {
   border-bottom: none;
 }
 .flexibleTable-section {
-  border-bottom: 1px solid rgba(0,0,0,0.2);
+  border-bottom: 1px solid rgba(0,0,0,0.4);
 }
 .flexibleTable-section-before {
   border-bottom: 1px solid rgba(0,0,0,0.1);
