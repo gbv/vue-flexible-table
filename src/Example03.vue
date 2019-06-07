@@ -68,6 +68,10 @@ export default {
             },
           ],
         },
+        {
+          name: "Third, empty section",
+          items: [],
+        },
       ],
     }
   },
