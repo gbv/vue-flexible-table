@@ -69,8 +69,9 @@ export default {
           ],
         },
         {
-          name: "Third, empty section",
+          name: "Third, empty section, with class",
           items: [],
+          _class: "custom-section-class",
         },
       ],
     }
@@ -79,4 +80,7 @@ export default {
 </script>
 
 <style>
+.custom-section-class > .flexibleTable-section-before {
+  background-color: lightgrey;
+}
 </style>

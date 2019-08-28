@@ -84,7 +84,10 @@
       <div
         v-for="(section, section_index) in _sections"
         :key="`SECTION_${section_index}`"
-        class="flexibleTable-section">
+        class="flexibleTable-section"
+        :class="{
+          [section._class]: section._class != null
+        }">
         <!-- BEFORE_SECTION slot -->
         <div
           v-if="hasSlot('BEFORE_SECTION')"
