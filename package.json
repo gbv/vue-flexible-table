@@ -9,11 +9,7 @@
   },
   "license": "MIT",
   "main": "src/FlexibleTable.vue",
-  "module": "dist/vue-flexible-table.common.js",
   "unpkg": "dist/vue-flexible-table.umd.min.js",
-  "browser": {
-    "./sfc": "src/FlexibleTable.vue"
-  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --target lib --name vue-flexible-table src/FlexibleTable.vue",
