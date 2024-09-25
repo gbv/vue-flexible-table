@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <h1>vue-flexible-table</h1>
-    <a href="https://github.com/stefandesu/vue-flexible-table">https://github.com/stefandesu/vue-flexible-table</a>
+    <a href="https://github.com/gbv/vue-flexible-table">https://github.com/gbv/vue-flexible-table</a>
     <h2>Examples:</h2>
     <h3>Simple table with fixed width</h3>
     <example-01 />

@@ -5,7 +5,7 @@
   "author": "Stefan Peters",
   "repository": {
     "type": "git",
-    "url": "https://github.com/stefandesu/vue-flexible-table.git"
+    "url": "https://github.com/gbv/vue-flexible-table.git"
   },
   "license": "MIT",
   "type": "module",
