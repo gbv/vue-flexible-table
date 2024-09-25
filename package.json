@@ -14,15 +14,11 @@
     "src/FlexibleTable.vue",
     "src/index.js"
   ],
-  "main": "./dist/vue-flexible-table.umd.cjs",
-  "module": "./dist/vue-flexible-table.js",
+  "module": "./src/index.js",
   "exports": {
-    ".": {
-      "require": "./dist/vue-flexible-table.umd.cjs",
-      "import": "./dist/vue-flexible-table.js"
-    },
+    ".": "./src/index.js",
     "./style": "./dist/style.css",
-    "./sfc": "./src/index.js"
+    "./build": "./dist/vue-flexible-table.js"
   },
   "scripts": {
     "dev": "vite",
