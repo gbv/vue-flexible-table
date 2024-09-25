@@ -393,7 +393,7 @@ export default {
     },
     // from: https://forum.vuejs.org/t/check-if-components-slot-is-empty/6015/6
     hasSlot (name = "default") {
-      return !!this.$slots[name] || !!this.$scopedSlots[name];
+      return !!this.$slots[name] || !!this.$scopedSlots[name]
     },
   },
 }

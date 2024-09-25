@@ -8,14 +8,28 @@
     "url": "https://github.com/stefandesu/vue-flexible-table.git"
   },
   "license": "MIT",
-  "main": "src/FlexibleTable.vue",
-  "unpkg": "dist/vue-flexible-table.umd.min.js",
+  "type": "module",
+  "files": [
+    "dist",
+    "src/FlexibleTable.vue",
+    "src/index.js"
+  ],
+  "main": "./dist/vue-flexible-table.umd.cjs",
+  "module": "./dist/vue-flexible-table.js",
+  "exports": {
+    ".": {
+      "require": "./dist/vue-flexible-table.umd.cjs",
+      "import": "./dist/vue-flexible-table.js"
+    },
+    "./style": "./dist/style.css",
+    "./sfc": "./src/index.js"
+  },
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --target lib --name vue-flexible-table src/FlexibleTable.vue",
-    "build-app": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "fix": "eslint --fix ./src/*.{js,vue} ./src/**/*.{js,vue}",
+    "dev": "vite",
+    "build": "vite build",
+    "build-app": "BUILD_MODE=app vite build",
+    "lint": "eslint",
+    "fix": "eslint --fix",
     "lint-staged": "lint-staged"
   },
   "lint-staged": {
@@ -26,30 +40,18 @@
       "eslint --fix"
     ]
   },
-  "gitHooks": {
-    "pre-commit": "lint-staged"
-  },
+  "pre-commit": [
+    "lint-staged"
+  ],
   "dependencies": {
-    "core-js": "^3.6.5",
-    "vue": "^2.6.11"
+    "vue": "^2.7.16"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^4.5.12",
-    "@vue/cli-plugin-eslint": "^4.5.12",
-    "@vue/cli-service": "^4.5.12",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^6.8.0",
-    "eslint-plugin-vue": "^6.2.2",
-    "lint-staged": "^10.5.4",
-    "vue-template-compiler": "^2.6.12"
-  },
-  "postcss": {
-    "plugins": {
-      "autoprefixer": {}
-    }
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions"
-  ]
+    "@vitejs/plugin-vue2": "^2.3.1",
+    "eslint": "~9.11",
+    "eslint-config-gbv": "~2.1",
+    "lint-staged": "^15.2.10",
+    "pre-commit": "^1.2.2",
+    "vite": "^5.4.8"
+  }
 }
