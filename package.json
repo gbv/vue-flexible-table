@@ -30,7 +30,11 @@
     "build-app": "BUILD_MODE=app vite build",
     "lint": "eslint",
     "fix": "eslint --fix",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "release": "test $(git rev-parse --abbrev-ref HEAD) = master && git pull && npm version $SEMVER && git push --follow-tags",
+    "release:patch": "SEMVER=patch npm run release",
+    "release:minor": "SEMVER=minor npm run release",
+    "release:major": "SEMVER=major npm run release"
   },
   "lint-staged": {
     "src/**/*.{js,vue}": [
