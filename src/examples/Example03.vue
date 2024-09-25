@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import FlexibleTable from "./FlexibleTable.vue"
+import FlexibleTable from "vue-flexible-table/sfc"
 
 export default {
   name: "Example02",

@@ -1,15 +1,14 @@
 <template>
   <flexible-table
-    class="table1"
     :fields="fields"
     :items="items" />
 </template>
 
 <script>
-import FlexibleTable from "./FlexibleTable.vue"
+import FlexibleTable from "vue-flexible-table/sfc"
 
 export default {
-  name: "Example01",
+  name: "Example02",
   components: { FlexibleTable },
   data () {
     return {
@@ -31,6 +30,7 @@ export default {
         {
           c1: "Hello",
           c2: "World",
+          _rowClass: "red",
         },
         {
           c1: "What's",
@@ -55,9 +55,7 @@ export default {
 </script>
 
 <style>
-.table1 {
-  width: 300px;
-  margin: 0 auto;
-  overflow: scroll;
+.red {
+  background-color: red;
 }
 </style>

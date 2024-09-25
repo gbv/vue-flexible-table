@@ -52,6 +52,7 @@
     "eslint-config-gbv": "~2.1",
     "lint-staged": "^15.2.10",
     "pre-commit": "^1.2.2",
-    "vite": "^5.4.8"
+    "vite": "^5.4.8",
+    "vue-flexible-table": "file:."
   }
 }

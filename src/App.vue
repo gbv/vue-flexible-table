@@ -15,10 +15,10 @@
 </template>
 
 <script>
-import Example01 from "./Example01.vue"
-import Example02 from "./Example02.vue"
-import Example03 from "./Example03.vue"
-import Example04 from "./Example04.vue"
+import Example01 from "./examples/Example01.vue"
+import Example02 from "./examples/Example02.vue"
+import Example03 from "./examples/Example03.vue"
+import Example04 from "./examples/Example04.vue"
 
 export default {
   name: "App",
