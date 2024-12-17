@@ -15,6 +15,7 @@ if (process.env.BUILD_MODE !== "app") {
     lib: {
       entry: resolve(__dirname, "src/index.js"),
       name: "VueFlexibleTable",
+      cssFileName: "style",
     },
     rollupOptions: {
       external: ["vue"],
