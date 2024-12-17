@@ -31,7 +31,8 @@
     "release": "test $(git rev-parse --abbrev-ref HEAD) = master && git pull && npm version $SEMVER && git push --follow-tags",
     "release:patch": "SEMVER=patch npm run release",
     "release:minor": "SEMVER=minor npm run release",
-    "release:major": "SEMVER=major npm run release"
+    "release:major": "SEMVER=major npm run release",
+    "prepare": "husky || true"
   },
   "lint-staged": {
     "src/**/*.{js,vue}": [
@@ -41,9 +42,6 @@
       "eslint --fix"
     ]
   },
-  "pre-commit": [
-    "lint-staged"
-  ],
   "dependencies": {
     "vue": "^2.7.16"
   },
@@ -51,8 +49,8 @@
     "@vitejs/plugin-vue2": "^2.3.3",
     "eslint": "~9.16",
     "eslint-config-gbv": "~2.6",
+    "husky": "^9.1.7",
     "lint-staged": "^15.2.11",
-    "pre-commit": "^1.2.2",
     "vite": "^6.0.3",
     "vue-flexible-table": "file:."
   }
