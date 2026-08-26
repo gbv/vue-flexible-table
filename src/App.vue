@@ -11,6 +11,8 @@
     <example-03 />
     <h3>Table with fixed width and height (demonstrates sticky header)</h3>
     <example-04 />
+    <h3>Table that reflects the emitted hover payload</h3>
+    <example-05 />
   </div>
 </template>
 
@@ -19,6 +21,7 @@ import Example01 from "./examples/Example01.vue"
 import Example02 from "./examples/Example02.vue"
 import Example03 from "./examples/Example03.vue"
 import Example04 from "./examples/Example04.vue"
+import Example05 from "./examples/Example05.vue"
 
 export default {
   name: "App",
@@ -27,6 +30,7 @@ export default {
     Example02,
     Example03,
     Example04,
+    Example05,
   },
 }
 </script>

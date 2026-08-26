@@ -4,12 +4,12 @@
 [![GitHub package version](https://img.shields.io/github/package-json/v/gbv/vue-flexible-table.svg?label=version)](https://github.com/gbv/vue-flexible-table)
 [![NPM package name](https://img.shields.io/badge/npm-vue--flexible--table-blue.svg)](https://www.npmjs.com/package/vue-flexible-table)
 
-> A flexible table component for Vue.js 2.
+A flexible Vue 3 table component.
 
-This motivation to create this table component was to have a table that
+The motivation to create this table component was to have a table that
 - takes up all space that it has available,
 - scrolls when available space is not enough,
-- resizes it's columns dynamically,
+- resizes its columns dynamically,
 - has a fixed head when the body is overflowing vertically,
 - synchronizes body and head when scrolling horizontally,
 - has custom sorting,
@@ -34,36 +34,52 @@ npm install vue-flexible-table
 
 ## Usage
 
-To include the FlexibleTable component globally, add this to your project's `main.js`:
+Register the component globally as a plugin in your project's `main.js`. The package ships an idiomatic Vue 3 plugin via its `.install` method, so use it with `app.use`:
 
 ```js
+import { createApp } from "vue"
+import App from "./App.vue"
 import FlexibleTable from "vue-flexible-table"
-Vue.use(FlexibleTable)
+
+const app = createApp(App)
+app.use(FlexibleTable)
+app.mount("#app")
 ```
 
-You can also add it to specific components only:
+Or register the component locally in a single-file component using the Options API:
 
 ```js
 import FlexibleTable from "vue-flexible-table"
+
 export default {
-  // ...
+  name: "MyComponent",
   components: { FlexibleTable },
-  // ...
 }
 ```
 
-Both of these methods use the SFC (single-file component) directly, without a build. If you prefer the built version, import it like this:
+A minimal example using `<script setup>` and the `fields`/`items` props:
 
-```js
-import FlexibleTable from "vue-flexible-table/style"
-import FlexibleTable from "vue-flexible-table/build"
-Vue.use(FlexibleTable) // or add to component
+```vue
+<script setup>
+import FlexibleTable from "vue-flexible-table"
+
+const fields = [
+  { key: "c1", label: "Column 1", sortable: true, minWidth: "200px" },
+  { key: "c2", label: "Column 2", minWidth: "200px" },
+]
+const items = [{ c1: "Hello", c2: "World" }]
+</script>
+
+<template>
+  <flexible-table :fields="fields" :items="items" />
+</template>
 ```
 
-For usage examples, please refer to the examples here: https://github.com/gbv/vue-flexible-table/tree/master/src/examples
+For more usage examples, including custom sections via named slots, please refer to the examples here: https://github.com/gbv/vue-flexible-table/tree/master/src/examples
 
 ## Development
-Development requires Node.js 18 or later.
+
+Development requires Node.js **22 or later**.
 
 ```sh
 # Clone repo
@@ -82,7 +98,7 @@ npm run build
 
 ## Contribute
 
-PRs accepted.
+PRs accepted. Feel free to [open an issue](https://github.com/gbv/vue-flexible-table/issues/new) to ask questions or report problems.
 
 Small note: If editing the README, please conform to the [standard-readme](https://github.com/RichardLitt/standard-readme) specification.
 

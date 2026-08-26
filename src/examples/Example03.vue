@@ -2,16 +2,12 @@
   <flexible-table
     :fields="fields"
     :sections="sections">
-    <span
-      slot="BEFORE_SECTION"
-      slot-scope="{ section }">
+    <template #BEFORE_SECTION="{ section }">
       Before <b>{{ section.name }}</b>
-    </span>
-    <span
-      slot="AFTER_SECTION"
-      slot-scope="{ section }">
+    </template>
+    <template #AFTER_SECTION="{ section }">
       After <b>{{ section.name }}</b>
-    </span>
+    </template>
   </flexible-table>
 </template>
 

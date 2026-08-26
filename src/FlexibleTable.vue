@@ -19,7 +19,7 @@
             'flexibleTable-sortable': field.sortable
           }"
           @click="field.sortable && sort(field)">
-          <!-- Slot for head cell content. Override with <template slot="HEAD_key" slot-scope="{ field }"> -->
+          <!-- Slot for head cell content. Override with <template #HEAD_key="{ field }"> -->
           <slot
             :name="'HEAD_' + field.key"
             :field="field">
@@ -114,7 +114,7 @@
                   ['flexibleTable-cell-' + (item.align || defaultAlign)]: true,
                   [item._rowClass]: item._rowClass != null
                 }">
-                <!-- Slot for whole row. Override with <template slot="ITEM_ROW" slot-scope="{ item, value }"> -->
+                <!-- Slot for whole row. Override with <template #ITEM_ROW="{ item, value }"> -->
                 <slot
                   :name="'ITEM_ROW'"
                   :item="item"
@@ -137,7 +137,7 @@
                   ['flexibleTable-cell-' + (field.align || defaultAlign)]: true,
                   [item._rowClass]: item._rowClass != null
                 }">
-                <!-- Slot for cell content. Override with <template slot="key" slot-scope="{ field, item, value }"> -->
+                <!-- Slot for cell content. Override with <template #key="{ field, item, value }"> -->
                 <slot
                   :name="field.key"
                   :field="field"
@@ -252,6 +252,7 @@ export default {
       default: false,
     },
   },
+  emits: ["hover"],
   data () {
     return {
       // Contains the current sorting preferences.
@@ -393,7 +394,7 @@ export default {
     },
     // from: https://forum.vuejs.org/t/check-if-components-slot-is-empty/6015/6
     hasSlot (name = "default") {
-      return !!this.$slots[name] || !!this.$scopedSlots[name]
+      return !!this.$slots[name]
     },
   },
 }
