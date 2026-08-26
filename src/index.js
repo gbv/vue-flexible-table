@@ -1,12 +1,8 @@
 import FlexibleTable from "./FlexibleTable.vue"
 
-FlexibleTable.install = (vue) => {
-  vue.component(FlexibleTable.name, FlexibleTable)
-}
-
-// Install method so that it can be used as a plugin.
-export const install = (vue) => {
-  vue.use(FlexibleTable)
+// Install method so that it can be used as a plugin with `app.use(FlexibleTable)`.
+FlexibleTable.install = (app) => {
+  app.component(FlexibleTable.name, FlexibleTable)
 }
 
 export default FlexibleTable

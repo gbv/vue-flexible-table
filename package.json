@@ -1,7 +1,7 @@
 {
   "name": "vue-flexible-table",
   "version": "0.4.0",
-  "description": "A flexible Vue table component.",
+  "description": "A flexible Vue 3 table component.",
   "author": "Stefan Peters",
   "repository": {
     "type": "git",
@@ -25,6 +25,7 @@
     "build": "vite build",
     "build-app": "BUILD_MODE=app vite build",
     "test": "npm run lint",
+    "e2e": "playwright test",
     "lint": "eslint",
     "fix": "eslint --fix",
     "lint-staged": "lint-staged",
@@ -42,16 +43,18 @@
       "eslint --fix"
     ]
   },
-  "dependencies": {
-    "vue": "^2.7.16"
+  "peerDependencies": {
+    "vue": "^3"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue2": "^2.3.3",
+    "@playwright/test": "^1.62.1",
+    "@vitejs/plugin-vue": "^6.0.8",
     "eslint": "~9.16",
     "eslint-config-gbv": "~2.6",
     "husky": "^9.1.7",
     "lint-staged": "^15.2.11",
     "vite": "^6.0.3",
+    "vue": "3.5.41",
     "vue-flexible-table": "file:."
   }
 }
