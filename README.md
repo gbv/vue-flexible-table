@@ -75,7 +75,7 @@ const items = [{ c1: "Hello", c2: "World" }]
 </template>
 ```
 
-For more usage examples, including custom sections via named slots, please refer to the examples here: https://github.com/gbv/vue-flexible-table/tree/master/src/examples
+For more usage examples, including custom sections via named slots, please refer to the examples here: https://github.com/gbv/vue-flexible-table/tree/main/src/examples
 
 ## Development
 
