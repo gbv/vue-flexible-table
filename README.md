@@ -92,9 +92,27 @@ npm run dev
 npm run build
 ```
 
+Please stick to a common coding style:
+
+```
+npm run lint    # check coding style
+npm run fix     # fix style
+```
+
+Tests are split into unit tests and browser tests (e2e). Browser tests are based [on the examples](src/examples/):
+
+```
+# Unit tests (only lint coding style)
+npm test
+# e2e tests (requires to install playwright)
+npm run e2e
+# build examples and serve them for testing
+npm run app
+```
+
 ## Maintainers
 
-[@stefandesu](https://github.com/stefandesu)
+[@nichtich](https://github.com/nichtich)
 
 ## Contribute
 
