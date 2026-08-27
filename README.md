@@ -75,7 +75,9 @@ const items = [{ c1: "Hello", c2: "World" }]
 </template>
 ```
 
-For more usage examples, including custom sections via named slots, please refer to the examples here: https://github.com/gbv/vue-flexible-table/tree/main/src/examples
+For more usage examples, including custom sections via named slots, please refer to [the examples].
+
+[the examples]: https://github.com/gbv/vue-flexible-table/tree/main/src/examples
 
 ## Development
 
@@ -99,7 +101,7 @@ npm run lint    # check coding style
 npm run fix     # fix style
 ```
 
-Tests are split into unit tests and browser tests (e2e). Browser tests are based [on the examples](src/examples/):
+Tests are split into unit tests and browser tests (e2e). Browser tests are based [the examples].
 
 ```
 # Unit tests (only lint coding style)
@@ -124,4 +126,4 @@ Small note: If editing the README, please conform to the [standard-readme](https
 
 ## License
 
-MIT ©2018 Verbundzentrale des GBV (VZG)
+MIT ©2018- Verbundzentrale des GBV (VZG)
