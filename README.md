@@ -110,6 +110,8 @@ npm run e2e
 npm run app
 ```
 
+The examples app is also deployed at <https://gbv.github.io/vue-flexible-table/> from `dev` and `main` branch.
+
 ## Maintainers
 
 [@nichtich](https://github.com/nichtich)

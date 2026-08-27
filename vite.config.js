@@ -5,7 +5,7 @@ import { resolve } from "path"
 /**
  * Allow two different builds:
  * - `npm run build` builds the library
- * - `BUILD_MODE=app npm run build` builds the app (App.vue)
+ * - `BUILD_MODE=app npm run build` builds the demo app (App.vue)
  *
  * Note that the destination folder `dist` will be emptied before each build.
  */
