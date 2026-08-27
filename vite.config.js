@@ -13,7 +13,7 @@ let build
 if (process.env.BUILD_MODE !== "app") {
   build = {
     lib: {
-      entry: resolve(__dirname, "src/index.js"),
+      entry: resolve(import.meta.dirname, "src/index.js"),
       name: "VueFlexibleTable",
       cssFileName: "style",
     },
