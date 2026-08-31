@@ -25,7 +25,7 @@ jobs:
     - name: Upload
       uses: actions/upload-pages-artifact@v3
       with:
-        path: ./dist
+        path: ./examples/app
   deploy:
     needs: build
     permissions:

@@ -1,3 +1,7 @@
+# 1.1.0
+
+- Refactor directory layout, tests, and how the package is exported
+
 # 1.0.0
 
 - Migrate to Vue 3 (**breaking change**) and add an end-to-end test. The public component API (props, slot names, emitted events) is unchanged.

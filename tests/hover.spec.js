@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest"
 import { mount } from "@vue/test-utils"
-import App from "../src/App.vue"
+import App from "../examples/App.vue"
 
 // Example05 binds @hover on <flexible-table> and reflects the emitted payload into the
 // ".last-hovered" element (the item's "c1/c2", or "" when null). Asserting there proves

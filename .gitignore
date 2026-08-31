@@ -2,9 +2,8 @@
 node_modules/
 npm-debug.log*
 dist/
-test-results/
-playwright-report/
-.playwright/
+coverage/
+examples/app/
 
 # Editor directories and files
 .idea

@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest"
 import { mount } from "@vue/test-utils"
-import App from "../src/App.vue"
+import App from "../examples/App.vue"
 
 // Example02 is the only table carrying a ".red" cell, so it uniquely identifies the
 // sortable table used here. Its c1 column holds "Hello" followed by four "What's".

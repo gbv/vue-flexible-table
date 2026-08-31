@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest"
 import { mount } from "@vue/test-utils"
-import App from "../src/App.vue"
+import App from "../examples/App.vue"
 
 describe("vue-flexible-table rendering", () => {
   test("renders column headers", () => {

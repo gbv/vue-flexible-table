@@ -11,22 +11,24 @@
   "type": "module",
   "files": [
     "dist",
-    "src/FlexibleTable.vue",
-    "src/index.js"
+    "FlexibleTable.vue",
+    "index.js"
   ],
-  "module": "./src/index.js",
+  "module": "./index.js",
   "exports": {
-    ".": "./src/index.js",
-    "./style": "./dist/style.css",
-    "./build": "./dist/vue-flexible-table.js"
-  },
+    ".": {
+      "require": "./dist/vue-flexible-table.umd.cjs",
+      "import": "./dist/vue-flexible-table.js"
+    },
+    "./dist/style.css": "./dist/style.css"
+  },  
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build-app": "BUILD_MODE=app vite build",
-    "app": "BUILD_MODE=app vite build && vite preview",
-    "test": "vitest run",
-    "coverage": "vitest run --coverage",    
+    "build-app": "vite build && BUILD_MODE=app vite build",    
+    "app": "npm run build-app && BUILD_MODE=app vite preview",
+    "test": "npm run build && vitest run",
+    "coverage": "npm run build && vitest run --coverage",    
     "lint": "eslint",
     "fix": "eslint --fix",
     "lint-staged": "lint-staged",

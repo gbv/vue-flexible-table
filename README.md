@@ -40,6 +40,7 @@ Register the component globally as a plugin in your project's `main.js`. The pac
 import { createApp } from "vue"
 import App from "./App.vue"
 import FlexibleTable from "vue-flexible-table"
+import "vue-flexible-table/dist/style.css"
 
 const app = createApp(App)
 app.use(FlexibleTable)
@@ -50,6 +51,7 @@ Or register the component locally in a single-file component using the Options A
 
 ```js
 import FlexibleTable from "vue-flexible-table"
+import "vue-flexible-table/dist/style.css"
 
 export default {
   name: "MyComponent",
@@ -62,6 +64,7 @@ A minimal example using `<script setup>` and the `fields`/`items` props:
 ```vue
 <script setup>
 import FlexibleTable from "vue-flexible-table"
+import "vue-flexible-table/dist/style.css"
 
 const fields = [
   { key: "c1", label: "Column 1", sortable: true, minWidth: "200px" },
@@ -77,11 +80,11 @@ const items = [{ c1: "Hello", c2: "World" }]
 
 For more usage examples, including custom sections via named slots, please refer to [the examples].
 
-[the examples]: https://github.com/gbv/vue-flexible-table/tree/main/src/examples
+[the examples]: https://github.com/gbv/vue-flexible-table/tree/main/examples
 
 ## Development
 
-Development requires Node.js **22 or later**.
+Development requires Node.js **26 or later**.
 
 ```sh
 # Clone repo
