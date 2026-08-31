@@ -113,7 +113,7 @@ npm test
 npm run app
 ```
 
-The examples app is also deployed at <https://gbv.github.io/vue-flexible-table/> from `dev` and `main` branch.
+The examples app is also deployed at <https://gbv.github.io/vue-flexible-table/> from `main` and at <https://gbv.github.io/vue-flexible-table/dev/> from `dev` branch.
 
 ## Maintainers
 
