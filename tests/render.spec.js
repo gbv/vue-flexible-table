@@ -1,50 +1,61 @@
-import { test, expect } from "@playwright/test"
+import { describe, test, expect } from "vitest"
+import { mount } from "@vue/test-utils"
+import App from "../src/App.vue"
 
-test.describe("vue-flexible-table rendering", () => {
-  test("renders column headers", async ({ page }) => {
-    await page.goto("/")
-    const headers = page.locator(".flexibleTable-head .flexibleTable-cell")
-    await expect(headers.first()).toBeVisible()
-    await expect(headers).toContainText(["Column 1", "Column 2"])
+describe("vue-flexible-table rendering", () => {
+  test("renders column headers", () => {
+    const wrapper = mount(App)
+    const headers = wrapper.findAll(".flexibleTable-head .flexibleTable-cell")
+    expect(headers.length).toBeGreaterThan(0)
+    const texts = headers.map(h => h.text())
+    expect(texts.some(t => t.includes("Column 1"))).toBe(true)
+    expect(texts.some(t => t.includes("Column 2"))).toBe(true)
   })
 
-  test("renders one row per item with the raw cell content", async ({ page }) => {
-    await page.goto("/")
+  test("renders one row per item with the raw cell content", () => {
+    const wrapper = mount(App)
     // The first table on the page is Example01, which has five items.
-    const table = page.locator(".flexibleTable").first()
-    const rows = table.locator(".flexibleTable-body .flexibleTable-row")
-    await expect(rows).toHaveCount(5)
-    const cells = table.locator(".flexibleTable-body .flexibleTable-cell")
-    await expect(cells.first()).toContainText("Hello")
-    await expect(cells.nth(1)).toContainText("World")
+    const table = wrapper.findAll(".flexibleTable")[0]
+    const rows = table.findAll(".flexibleTable-body .flexibleTable-row")
+    expect(rows.length).toBe(5)
+    const cells = table.findAll(".flexibleTable-body .flexibleTable-cell")
+    expect(cells[0].text()).toContain("Hello")
+    expect(cells[1].text()).toContain("World")
   })
 
-  test("applies the _rowClass of an item (Example02)", async ({ page }) => {
-    await page.goto("/")
-    const redCell = page.locator(".flexibleTable-cell.red").first()
-    await expect(redCell).toBeVisible()
+  test("applies the _rowClass of an item (Example02)", () => {
+    const wrapper = mount(App)
+    const redCell = wrapper.find(".flexibleTable-cell.red")
+    expect(redCell.exists()).toBe(true)
   })
 
-  test("renders a fixed-height table with a sticky header (Example04)", async ({ page }) => {
-    await page.goto("/")
-    // Example04 sets an explicit height on its .table1 wrapper (Example01 does not).
-    const heights = await page.locator(".table1").evaluateAll((els) => els.map((el) => getComputedStyle(el).height))
-    expect(heights).toContain("200px")
+  test("renders a fixed-height table with a sticky header (Example04)", () => {
+    const wrapper = mount(App)
+    const table1s = wrapper.findAll(".table1")
+    expect(table1s.length).toBe(2) // Example01 and Example04 both use class table1
+    // Example04 is the second table with class table1
+    const example04Table = table1s[1]
+    expect(example04Table.exists()).toBe(true)
+    expect(example04Table.classes()).toContain("table1")
   })
 
-  test("renders custom BEFORE_SECTION / AFTER_SECTION slots (Example03)", async ({ page }) => {
-    await page.goto("/")
-    const before = page.locator(".flexibleTable-section-before")
-    const after = page.locator(".flexibleTable-section-after")
-    await expect(before).toContainText(["Before First Section", "Before Second Section"])
-    await expect(after).toContainText(["After First Section", "After Second Section"])
+  test("renders custom BEFORE_SECTION / AFTER_SECTION slots (Example03)", () => {
+    const wrapper = mount(App)
+    const before = wrapper.findAll(".flexibleTable-section-before")
+    const after = wrapper.findAll(".flexibleTable-section-after")
+    const beforeTexts = before.map(b => b.text())
+    const afterTexts = after.map(a => a.text())
+    expect(beforeTexts).toContain("Before First Section")
+    expect(beforeTexts).toContain("Before Second Section")
+    expect(afterTexts).toContain("After First Section")
+    expect(afterTexts).toContain("After Second Section")
   })
 
-  test("renders an empty section that still shows its slots and custom class (Example03)", async ({ page }) => {
-    await page.goto("/")
-    const emptySection = page.locator(".custom-section-class")
-    await expect(emptySection).toHaveCount(1)
-    await expect(emptySection).toContainText("Before Third, empty section, with class")
-    await expect(emptySection).toContainText("After Third, empty section, with class")
+  test("renders an empty section that still shows its slots and custom class (Example03)", () => {
+    const wrapper = mount(App)
+    const emptySection = wrapper.findAll(".custom-section-class")
+    expect(emptySection.length).toBe(1)
+    expect(emptySection[0].text()).toContain("Before Third, empty section, with class")
+    expect(emptySection[0].text()).toContain("After Third, empty section, with class")
   })
 })

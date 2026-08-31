@@ -28,7 +28,6 @@ if (process.env.BUILD_MODE !== "app") {
   }
 }
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [vue({
     template: {
@@ -37,6 +36,13 @@ export default defineConfig({
       },
     },
   })],
+  test: {
+    globals: true,
+    environment: "happy-dom",
+    coverage: {
+      provider: "v8",
+    },
+  },
   build,
   base: "./",
 })

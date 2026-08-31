@@ -1,26 +1,29 @@
-import { test, expect } from "@playwright/test"
+import { describe, test, expect } from "vitest"
+import { mount } from "@vue/test-utils"
+import App from "../src/App.vue"
 
 // Example05 binds @hover on <flexible-table> and reflects the emitted payload into the
 // ".last-hovered" element (the item's "c1/c2", or "" when null). Asserting there proves
 // the component actually emits "hover" with its payload, not just that native mouseover/
 // mouseout events bubble to the DOM.
-test.beforeEach(async ({ page }) => {
-  await page.goto("/")
-})
+describe("vue-flexible-table hover", () => {
+  test("emits hover with the hovered item", async () => {
+    const wrapper = mount(App)
+    const rows = wrapper.findAll(".hover-demo .flexibleTable-body .flexibleTable-row")
+    expect(rows.length).toBeGreaterThan(0)
 
-test("emits hover with the hovered item", async ({ page }) => {
-  const rows = page.locator(".hover-demo .flexibleTable-body .flexibleTable-row")
-  await expect(rows.first()).toBeVisible()
-  await rows.first().hover()
-  // Example05's first row carries item { c1: "Alpha", c2: "One" }.
-  await expect(page.locator(".last-hovered")).toHaveText("Alpha/One")
-})
+    await rows[0].trigger("mouseover")
+    expect(wrapper.find(".last-hovered").text()).toBe("Alpha/One")
+  })
 
-test("emits hover again (null) when the mouse leaves a row", async ({ page }) => {
-  const rows = page.locator(".hover-demo .flexibleTable-body .flexibleTable-row")
-  await rows.first().hover()
-  await expect(page.locator(".last-hovered")).toHaveText("Alpha/One")
-  // Move the cursor onto a non-row element (the app heading) so the row fires mouseout.
-  await page.locator("#app h1").hover()
-  await expect(page.locator(".last-hovered")).toHaveText("")
+  test("emits hover again (null) when the mouse leaves a row", async () => {
+    const wrapper = mount(App)
+    const rows = wrapper.findAll(".hover-demo .flexibleTable-body .flexibleTable-row")
+
+    await rows[0].trigger("mouseover")
+    expect(wrapper.find(".last-hovered").text()).toBe("Alpha/One")
+
+    await rows[0].trigger("mouseout")
+    expect(wrapper.find(".last-hovered").text()).toBe("")
+  })
 })
