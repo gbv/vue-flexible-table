@@ -402,6 +402,11 @@ export default {
 </script>
 
 <style>
+:root {
+  --flexible-table-line: 1px solid rgba(0,0,0,0.4);
+  --flexible-table-section-line: 1px dotted rgba(0,0,0,0.1);
+  --flexible-table-hover: rgba(0,0,0,0.1);
+}
 .flexibleTable {
   display: flex;
   flex-direction: column;
@@ -437,13 +442,12 @@ export default {
 }
 .flexibleTable-head .flexibleTable-cell {
   user-select: none;
-  border-bottom: 1px solid rgba(0,0,0,0.4);
+  border-bottom: var(--flexible-table-line);
 }
 .flexibleTable-head .flexibleTable-cell.flexibleTable-sortable {
   cursor: pointer;
 }
 .flexibleTable-head .flexibleTable-cell.flexibleTable-sortable:hover {
-  /* FIXME: This overrides custom background colors. */
   color: rgba(0,0,0,0.5);
 }
 .flexibleTable-body .flexibleTable-cell {
@@ -454,19 +458,18 @@ export default {
   border-bottom: none;
 }
 .flexibleTable-section {
-  border-bottom: 1px solid rgba(0,0,0,0.4);
+  border-bottom: var(--flexible-table-line);
 }
 .flexibleTable-section-before {
-  border-bottom: 1px solid rgba(0,0,0,0.1);
+  border-bottom:  var(--flexible-table-section-line);
   padding: 3px 0;
 }
 .flexibleTable-section-after {
-  border-top: 1px solid rgba(0,0,0,0.1);
+  border-top:  var(--flexible-table-section-line);
   padding: 3px 0;
 }
 .flexibleTable-body .flexibleTable-row:hover .flexibleTable-cell {
-  /* FIXME: This overrides custom background colors. */
-  background-color: rgba(0,0,0,0.1);
+  background-color: var(--flexible-table-hover);
 }
 .flexibleTable-cell-sort {
   margin-left: 2px;

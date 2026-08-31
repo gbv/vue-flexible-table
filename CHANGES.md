@@ -1,6 +1,7 @@
 # 1.1.0
 
 - Refactor directory layout, tests, and how the package is exported
+- Introduce some CSS variables
 
 # 1.0.0
 

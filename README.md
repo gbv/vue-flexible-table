@@ -78,6 +78,12 @@ const items = [{ c1: "Hello", c2: "World" }]
 </template>
 ```
 
+The layout can be configured with CSS classes and the following CSS variables:
+
+- `--flexible-table-line` line below header and end of table (default: `1px solid rgba(0,0,0,0.4)`)
+- `--flexible-table-section-line` line below and above optional slocts `BEFORE_SECTION` (default: 1px dotted rgba(0,0,0,0.1)`)
+- `--flexible-table-hover` color of hovered row (default: `rgba(0,0,0,0.1)`)
+
 For more usage examples, including custom sections via named slots, please refer to [the examples].
 
 [the examples]: https://github.com/gbv/vue-flexible-table/tree/main/examples
