@@ -8,7 +8,7 @@
     <example-01 />
     <h3>Simple table with 100% width (default) and a rowClass</h3>
     <example-02 />
-    <h3>Table with sections</h3>
+    <h3>Table with sections and clickable rows</h3>
     <example-03 />
     <h3>Table with fixed width and height (demonstrates sticky header)</h3>
     <example-04 />

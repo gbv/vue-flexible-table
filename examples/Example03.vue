@@ -1,7 +1,8 @@
 <template>
   <flexible-table
     :fields="fields"
-    :sections="sections">
+    :sections="sections"
+    @click="onClick">
     <template #BEFORE_SECTION="{ section }">
       Before <b>{{ section.name }}</b>
     </template>
@@ -72,11 +73,22 @@ export default {
       ],
     }
   },
+  methods: {
+    onClick(item) {        
+      item._rowClass = item._rowClass ? "" : "selected"
+    },
+  },
 }
 </script>
 
 <style>
 .custom-section-class > .flexibleTable-section-before {
   background-color: lightgrey;
+}
+.selected {
+  background-color: lightgreen;
+}
+.flexibleTable-body .flexibleTable-row:hover .flexibleTable-cell.selected {
+  background-color: green;
 }
 </style>

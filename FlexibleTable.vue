@@ -101,6 +101,7 @@
           <div
             v-for="(item, item_index) in sorted(section.items)"
             :key="`SECTION_${section_index}_ITEM_${item_index}`"
+            @click="$emit('click', item)"
             @mouseover="$emit('hover', item)"
             @mouseout="$emit('hover', null)">
             <!-- Special case to use a whole row for an item -->
@@ -252,7 +253,7 @@ export default {
       default: false,
     },
   },
-  emits: ["hover"],
+  emits: ["hover", "click"],
   data () {
     return {
       // Contains the current sorting preferences.
@@ -400,7 +401,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .flexibleTable {
   display: flex;
   flex-direction: column;
@@ -442,6 +443,7 @@ export default {
   cursor: pointer;
 }
 .flexibleTable-head .flexibleTable-cell.flexibleTable-sortable:hover {
+  /* FIXME: This overrides custom background colors. */
   color: rgba(0,0,0,0.5);
 }
 .flexibleTable-body .flexibleTable-cell {
